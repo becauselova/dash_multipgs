@@ -5,6 +5,8 @@ import pandas as pd
 import pathlib
 from app import app
 
+dash.register_page(__name__)
+
 # get relative data folder
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("../datasets").resolve()
