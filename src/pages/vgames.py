@@ -1,29 +1,25 @@
-from dash import Dash, dcc, html
-from dash.dependencies import Input, Output
+import dash
+
+dash.register_page(__name__)
+
+from dash import Dash, dcc, html, callback, Input, Output, callback
 import plotly.express as px
 import pandas as pd
 import pathlib
-from app import app
-
-dash.register_page(__name__)
 
 # get relative data folder
 PATH = pathlib.Path(__file__).parent
 DATA_PATH = PATH.joinpath("../datasets").resolve()
-
 dfv = pd.read_csv(DATA_PATH.joinpath("vgsales.csv"))  # GregorySmith Kaggle
 sales_list = ["North American Sales", "EU Sales", "Japan Sales", "Other Sales",	"World Sales"]
 
-
 layout = html.Div([
     html.H1('Video Games Sales', style={"textAlign": "center"}),
-
     html.Div([
         html.Div(dcc.Dropdown(
             id='genre-dropdown', value='Strategy', clearable=False,
             options=[{'label': x, 'value': x} for x in sorted(dfv.Genre.unique())]
         ), className='six columns'),
-
         html.Div(dcc.Dropdown(
             id='sales-dropdown', value='EU Sales', clearable=False,
             persistence=True, persistence_type='memory',
@@ -35,7 +31,7 @@ layout = html.Div([
 ])
 
 
-@app.callback(
+@callback(
     Output(component_id='my-bar', component_property='figure'),
     [Input(component_id='genre-dropdown', component_property='value'),
      Input(component_id='sales-dropdown', component_property='value')]
