@@ -3,7 +3,7 @@ import dash
 from dash import Dash, dcc, html
 import dash_bootstrap_components as dbc
 
-app = dash.Dash(__name__, pages_folder="C:/Users/Nataliya/Desktop/Multi/src/pages", use_pages = True, external_stylesheets=[dbc.themes.BOOTSTRAP])
+app = dash.Dash(__name__, use_pages = True, external_stylesheets=[dbc.themes.BOOTSTRAP])
 server = app.server
 
 navbar = dbc.NavbarSimple(
